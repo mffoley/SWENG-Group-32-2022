@@ -14,8 +14,8 @@ def readECGData ():
     print(current_directory)    
 
 
-    train = pd.read_csv('C:/Users/Pascal Raos/Desktop/ECG Project/data/mitbih_train.csv', header=None)
-    test = pd.read_csv('C:/Users/Pascal Raos/Desktop/ECG Project/data/mitbih_test.csv', header=None)
+    train = pd.read_csv(current_directory + '/data/mitbih_train.csv', header=None)
+    test = pd.read_csv(current_directory + '/data/mitbih_test.csv', header=None)
 
     return train, test
 

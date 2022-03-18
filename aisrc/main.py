@@ -11,8 +11,8 @@ train, test = readECGData()
 
 #format for accessing pandas dataframes
 #dataframes = var[column][row]
-    # for column in train:
-    #      print(train[column][86789]) # prints all values in row 1pyth
+for column in train:
+    print(train[column][86789]) # prints all values in row 1pyth
 
 #model([train_inputs, train_outputs],[test_inputs, test_outputs])
 #separate training input and output for model
