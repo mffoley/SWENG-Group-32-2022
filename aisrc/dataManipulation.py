@@ -2,6 +2,7 @@
 import numpy as np 
 import pandas as pd 
 from sklearn.utils import resample
+from keras.utils.np_utils import to_categorical 
 import os
 
 
@@ -44,3 +45,17 @@ def frequencyClasses (data):
     equilibre=data[187].value_counts()
     print(equilibre)
 
+#function that returns formatted training and testing outputs
+def formatOutputs (train, test):
+    train_outputs = to_categorical(train[187])
+    test_outputs = to_categorical(test[187])
+
+    return train_outputs, test_outputs
+    
+
+#function that returns formatted training and testing inputs
+def formatInputs (train, test):
+    train_inputs = train.iloc[:,:186].values
+    test_inputs = test.iloc[:,:186].values
+
+    return train_inputs, test_inputs
