@@ -6,6 +6,8 @@ from keras.utils.np_utils import to_categorical
 from dataManipulation import readECGData 
 from dataManipulation import frequencyClasses as getFrequency
 from dataManipulation import resampleData
+from dataManipulation import trainOutputs
+from dataManipulation import trainInputs
 
 train, test = readECGData()
 
