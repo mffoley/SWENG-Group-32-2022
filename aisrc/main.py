@@ -2,33 +2,20 @@
 
 #importing a function from the other file
 from keras.utils.np_utils import to_categorical
-
-from dataManipulation import readECGData 
-from dataManipulation import frequencyClasses as getFrequency
-from dataManipulation import resampleData
+from dataManipulation import readECGData,  frequencyClasses, resampleData, formatOutputs, formatInputs
+from simpleModel import makeModel, trainModel
 
 train, test = readECGData()
 
-#format for accessing pandas dataframes
-#dataframes = var[column][row]
-for column in train:
-    print(train[column][86789]) # prints all values in row 1pyth
+train_inputs, test_inputs = formatInputs(train, test)
 
-#model([train_inputs, train_outputs],[test_inputs, test_outputs])
-#separate training input and output for model
-    # train_outputs = to_categorical(train[187])
-    # train_inputs = train.iloc[:,:186].values
+train_outputs, test_outputs = formatOutputs(train, test)
 
-    # print(train_outputs)
-    # print(train_inputs[85427])
+print(train_outputs[84271])
+print(train_inputs[84271])
 
+my_model = makeModel(train_inputs, train_outputs)
 
-
-#below does the resampling for imbalanced data and prints frequencies
-    #resampleData(train)
-
-    #getFrequency(train)
-
-
+trained_model = trainModel(my_model, train_inputs, train_outputs, test_inputs, test_outputs)
 
         
