@@ -5,10 +5,10 @@ app = Flask(__name__)
 def home():
     return render_template("welcome.html", name="kevin"  )
 
-@app.route("/conic")
+@app.route("/results")
 def conic():
     print("data")
-    return redirect(url_for("home"))
+    return render_template("results.html", model_name="sample" , model_accuracy=99.5, normal = True )
 
 if __name__ == "__main__":
     app.debug = True
