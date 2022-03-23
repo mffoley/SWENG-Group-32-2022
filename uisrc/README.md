@@ -5,3 +5,13 @@
 4. Run the app by running `$ python3 __init__.py`
   1. Flask app will be running on `http://127.0.0.1:5000/`
   2. Control-C to end app
+
+
+### Git steps
+1. `git clone git@github.com:tiscovsa/SWENG-Group-32-2022.git` (only done once)
+2. Make edits
+3. `git pull` (do this frequently)
+4. `git status` (shows you all changes you have made recently)
+5. `git add <file names>` (note: only add files you have actively changed, do NOT add venv files)
+6. `git commit -m '<description of changes you made>'`
+7. `git push`
