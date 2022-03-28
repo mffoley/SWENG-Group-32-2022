@@ -2,6 +2,8 @@
 import numpy as np 
 import pandas as pd 
 from sklearn.utils import resample
+from sklearn.utils.class_weight import compute_class_weight
+from sklearn.utils import class_weight
 from keras.utils.np_utils import to_categorical 
 import os
 
@@ -36,7 +38,19 @@ def resampleData (data):
 
     result = pd.concat([data1up,data2up,data3up,data4up])
 
+    target_train=result[187]
+    target_test=result[187]
+    y_train=to_categorical(target_train)
+    y_test=to_categorical(target_test)  
+
+    X_train=result.iloc[:,:186].values
+    X_test=result.iloc[:,:186].values
+    for i in range(len(X_train)):
+        X_train[i,:186]= add_gaussian_noise(X_train[i,:186])
+    X_train = X_train.reshape(len(X_train), X_train.shape[1],1)
+    X_test = X_test.reshape(len(X_test), X_test.shape[1],1)
     return result
+
 
 
 #function that returns frequencies of all classes from a dataset
