@@ -1,6 +1,5 @@
 
-from keras.models import Model
-import numpy as np 
+from keras.models import Model 
 from keras.models import Sequential
 from keras.layers import Dense, Input
 from keras.layers import Convolution1D
@@ -9,6 +8,9 @@ from keras.layers import MaxPool1D
 from sklearn.utils.class_weight import compute_class_weight
 from sklearn.utils import class_weight
 from keras.layers import BatchNormalization
+import numpy as np
+import tensorflow as tf
+from tensorflow import keras
 
 
 def makeModel(train_inputs, train_outputs):
@@ -51,8 +53,16 @@ def trainModel(model, train_inputs, train_outputs, test_inputs, test_outputs):
 def trainModelClassWeight(model, train_inputs, train_outputs):
 
     class_weights = class_weight.compute_class_weight('balanced',np.unique(train_outputs),train_outputs)
-    model.fit(train_inputs, train_outputs, class_weight=class_weights)
+    
+    class_weights = dict(enumerate(class_weights))#don't know whether this is necessary or not
+    callbacks = [keras.callbacks.ModelCheckpoint("fraud_model_at_epoch_{epoch}.h5")]#don't know whether this is necessary or not
+
+    model.fit(train_inputs, train_outputs, epochs = 10, batch_size = 32, class_weight=class_weights, 
+    callbacks = callbacks, validation_data=(train_inputs, train_outputs), shuffle=True)
+    #shuffle and validation data can be removed
+
     model.save("simplemodel")
 
     return model
+
 
