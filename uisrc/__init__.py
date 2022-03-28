@@ -14,9 +14,8 @@ def allowed_file(filename):
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 def use_model(input, modelnum):
+    print(input)
     return {"normal":True,'model_name':"Sample Model",'model_acc':99.5}
-
-
 
 
 @app.route("/")
