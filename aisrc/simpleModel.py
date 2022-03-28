@@ -1,10 +1,13 @@
 
 from keras.models import Model
+import numpy as np 
 from keras.models import Sequential
 from keras.layers import Dense, Input
 from keras.layers import Convolution1D
 from keras.layers import Flatten
 from keras.layers import MaxPool1D
+from sklearn.utils.class_weight import compute_class_weight
+from sklearn.utils import class_weight
 from keras.layers import BatchNormalization
 
 
@@ -41,6 +44,14 @@ def makeModel(train_inputs, train_outputs):
 def trainModel(model, train_inputs, train_outputs, test_inputs, test_outputs):
 
     model.fit(train_inputs, train_outputs, epochs = 10, batch_size = 32, validation_data = (test_inputs, test_outputs))
+    model.save("simplemodel")
+
+    return model
+
+def trainModelClassWeight(model, train_inputs, train_outputs):
+
+    class_weights = class_weight.compute_class_weight('balanced',np.unique(train_outputs),train_outputs)
+    model.fit(train_inputs, train_outputs, class_weight=class_weights)
     model.save("simplemodel")
 
     return model
