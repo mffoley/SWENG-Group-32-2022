@@ -38,17 +38,10 @@ def resampleData (data):
 
     result = pd.concat([data1up,data2up,data3up,data4up])
 
-    target_train=result[187]
-    target_test=result[187]
-    y_train=to_categorical(target_train)
-    y_test=to_categorical(target_test)  
+      
 
     X_train=result.iloc[:,:186].values
     X_test=result.iloc[:,:186].values
-    for i in range(len(X_train)):
-        X_train[i,:186]= add_gaussian_noise(X_train[i,:186])
-    X_train = X_train.reshape(len(X_train), X_train.shape[1],1)
-    X_test = X_test.reshape(len(X_test), X_test.shape[1],1)
     return result
 
 
@@ -65,11 +58,17 @@ def formatOutputs (train, test):
     test_outputs = to_categorical(test[187])
 
     return train_outputs, test_outputs
+    #target_train=result[187]
+    #target_test=result[187]
+    #y_train=to_categorical(target_train)
+    #y_test=to_categorical(target_test)
     
 
 #function that returns formatted training and testing inputs
 def formatInputs (train, test):
     train_inputs = train.iloc[:,:186].values
     test_inputs = test.iloc[:,:186].values
+    #X_train=result.iloc[:,:186].values
+    #X_test=result.iloc[:,:186].values
 
     return train_inputs, test_inputs
