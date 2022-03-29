@@ -13,3 +13,10 @@ dependancies:
         pip install numpy
         python -m pip install pandas
 
+
+
+Goals:
+
+    Model 1: CNN with resampling and no noise
+    Model 2: CNN with class weights and gaussian noise
+    Model 3: Resnet

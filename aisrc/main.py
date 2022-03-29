@@ -20,9 +20,9 @@ train_outputs, test_outputs = formatOutputs(train, test)
 # #print(train_outputs[84271])
 # #print(train_inputs[84271])
 
-# my_model = makeModel(train_inputs, train_outputs)
+my_model = makeModel(train_inputs, train_outputs)
 
-# trained_model = trainModelClassWeight(my_model, train_inputs, train_outputs, test_inputs, test_outputs, raw_train_outputs)
+trained_model = trainModel(my_model, train_inputs, train_outputs, test_inputs, test_outputs)
 
 
 
