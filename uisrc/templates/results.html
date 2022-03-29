@@ -13,29 +13,46 @@
     <body2 class="container">
     <!--background image-->
     <center class="centered"> 
+        <h2 style="color: antiquewhite;">Results:</h2>
        
     <!--backbutton-->
     
-    <!-- noraml or abnormal + descripion-->
-    <br> <br> <br> 
-    <h1 style="font-size:20px;color:white;">Your ECG reading has been found to be </h1>
 
-    <!-- normal -->
-    {% if normal == true %}
-        <button style = "height:80px;width:200px;font-size:40px;" type="button" class="btn btn-success" ><b>Normal</b></button>
-        <br> <br>
-        <div class="alert alert-dark" role="alert">
-         For further information on how to maintin this reading please see <a href="https://irishheart.ie/how-to-keep-your-heart-healthy/" class="alert-link"> Irish Heart</a> or contact your local GP
-        </div>
-    <!--abnormal-->
-    {% else %}
-        <button style = "height:80px;width:200px;font-size:40px;" type="button" class="btn btn-danger"><b>Abnormal</b></button>
-        <br> <br>
-        <div class="alert alert-dark" role="alert">
-        For further information on what to do next please see <a href="https://www.healthline.com/health/abnormal-ekg" class="alert-link"> healthline</a> or contact your local GP
-        </div>
-     <!--end-->
-    {% endif %}
+        <table class="table table-light table-striped">
+            <thead>
+                <tr>
+                    
+                  <th scope="col">Entry #</th>
+                  {% for field in fields%}
+
+                  <th scope="col">{{ field }}</th>
+                  {% endfor %}
+
+                </tr>
+              </thead>
+              <tbody>
+                {% set count = namespace(value=1) %}
+                {% for result in results %}
+                    <tr>
+                        <th scope="row">
+                            {{ count.value }}
+                            {% set count.value = count.value + 1 %}
+                        </th>
+                            
+
+                            {% for field in fields%}
+
+                            <td>{{ result[field] }}</td>
+                            {% endfor %}
+                    </tr>
+
+                {% endfor %}
+
+              </tbody>
+        </table>
+
+
+
     <br> <br><br> <br>
     <!-- description of esg {model_name}-->
     <h1 style="font-size:20px;color:white;">This result is based on the model chosen: {{model_name}}</h1>
