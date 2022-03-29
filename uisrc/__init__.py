@@ -9,7 +9,7 @@ ALLOWED_EXTENSIONS = {'csv'}
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
-models = [{"name":"Simple Model", "acc":99.5}]
+models = [{"name":"Simple Model", "acc":99.5},{"name":"Complicated Model", "acc":92}]
 fields = ["normal", "var2", "var3", "var4","var5"]
 
 def allowed_file(filename):
@@ -23,8 +23,10 @@ def use_model(input, modelnum):
 
 @app.route("/")
 def home():
+    error = request.args.get('error')
+    print(error)
     print("home")
-    return render_template("input.html", name="kevin"  )
+    return render_template("input.html", error = error)
 
 @app.route("/results")
 def conic():
@@ -34,17 +36,19 @@ def conic():
 
 @app.route("/checker", methods = ['POST'])
 def check():
-    print(list(request.form.keys()))
-    if "file" in request.files.keys() and allowed_file(request.files['file'].filename):
-        f = request.files['file']
-        model_info = models[0]
-        # vvvvvvv do something with the file data vvvvvvv
-        data = use_model(f.read(),1)
-        # ^^^^^^^ do something with the file data ^^^^^^^
+    print("DATA:")
+    model = int(request.form['model'])
+    if "file" in request.files.keys() and request.files['file'].filename != "":
+        if allowed_file(request.files['file'].filename):
+            f = request.files['file']
+            model_info = models[model-1]
+            # vvvvvvv do something with the file data vvvvvvv
+            data = use_model(f.read(),model-1)
+            # ^^^^^^^ do something with the file data ^^^^^^^
 
-        return render_template("results.html", model_name=model_info["name"] , model_accuracy=model_info["acc"], fields=fields, results = data )
-
-    return redirect(url_for('home'))
+            return render_template("results.html", model_name=model_info["name"] , model_accuracy=model_info["acc"], fields=fields, results = data )
+        return redirect(url_for('home', error= "File type not supported."))
+    return redirect(url_for('home', error= "No file selected."))
 
 if __name__ == "__main__":
     app.debug = True
