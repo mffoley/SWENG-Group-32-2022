@@ -42,6 +42,10 @@ def resampleData (data):
 
 
 
+def add_gaussian_noise(signal):
+    noise=np.random.normal(0,0.5,186)
+    return (signal+noise)
+
 #function that returns frequencies of all classes from a dataset
 def frequencyClasses (data):
     data[187]=data[187].astype(int)
@@ -66,5 +70,14 @@ def formatInputs (train, test):
     test_inputs = test.iloc[:,:186].values
     #X_train=result.iloc[:,:186].values
     #X_test=result.iloc[:,:186].values
+
+    for i in range(len(train_inputs)):
+        train_inputs[i,:186]= add_gaussian_noise(train_inputs[i,:186])
+    train_inputs = train_inputs.reshape(len(train_inputs), train_inputs.shape[1],1)
+    test_inputs = test_inputs.reshape(len(test_inputs), test_inputs.shape[1],1)
+    #for i in range(len(X_train)):
+    #    X_train[i,:186]= add_gaussian_noise(X_train[i,:186])
+    #X_train = X_train.reshape(len(X_train), X_train.shape[1],1)
+    #X_test = X_test.reshape(len(X_test), X_test.shape[1],1)
 
     return train_inputs, test_inputs
