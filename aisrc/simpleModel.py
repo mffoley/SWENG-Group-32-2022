@@ -50,7 +50,7 @@ def trainModel(model, train_inputs, train_outputs, test_inputs, test_outputs):
 
     return model
 
-def trainModelClassWeight(model, train_inputs, train_outputs):
+def trainModelClassWeight(model, train_inputs, train_outputs, test_inputs, test_outputs):
 
     class_weights = class_weight.compute_class_weight('balanced',np.unique(train_outputs),train_outputs)
     
@@ -58,10 +58,10 @@ def trainModelClassWeight(model, train_inputs, train_outputs):
     callbacks = [keras.callbacks.ModelCheckpoint("fraud_model_at_epoch_{epoch}.h5")]#don't know whether this is necessary or not
 
     model.fit(train_inputs, train_outputs, epochs = 10, batch_size = 32, class_weight=class_weights, 
-    callbacks = callbacks, validation_data=(train_inputs, train_outputs), shuffle=True)
+    callbacks = callbacks, validation_data=(test_inputs, test_outputs), shuffle=True)
     #shuffle and validation data can be removed
 
-    model.save("simplemodel")
+    model.save("simplemodelweighted")
 
     return model
 

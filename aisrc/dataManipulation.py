@@ -36,12 +36,8 @@ def resampleData (data):
     data3up = resample(data3,replace=True,n_samples=20000,random_state=12)
     data4up = resample(data4,replace=True,n_samples=20000,random_state=13)
 
-    result = pd.concat([data1up,data2up,data3up,data4up])
-
-      
-
-    X_train=result.iloc[:,:186].values
-    X_test=result.iloc[:,:186].values
+    result = pd.concat([data0,data1up,data2up,data3up,data4up])
+    
     return result
 
 
