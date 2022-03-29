@@ -40,13 +40,34 @@ def resampleData (data):
     
     return result
 
+#function that calculates the class weighting for the weighted model, takes in imbalanced training data
+def calculateWeights(trainingData):
+
+    totalSize = trainingData.shape[0]
+    freq = frequencyClasses(trainingData)
+
+    weight0 = totalSize/(5*freq[0])
+    weight1 = totalSize/(5*freq[1])
+    weight2 = totalSize/(5*freq[2])
+    weight3 = totalSize/(5*freq[3])
+    weight4 = totalSize/(5*freq[4])
+
+    classWeights = {"0":weight0,"1":weight1,"2":weight2,"3":weight3,"4":weight4}
+
+    print(classWeights)
+
+    return classWeights
+
+
 
 
 #function that returns frequencies of all classes from a dataset
 def frequencyClasses (data):
     data[187]=data[187].astype(int)
-    equilibre=data[187].value_counts()
-    print(equilibre)
+    classcounts=data[187].value_counts()
+    
+    return classcounts
+
 
 #function that returns formatted training and testing outputs
 def formatOutputs (train, test):
