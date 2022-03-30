@@ -1,5 +1,6 @@
 import os
 import sys
+import pandas
 from flask import Flask, redirect, url_for, render_template, session, request, flash, get_flashed_messages
 from werkzeug.utils import secure_filename
 
@@ -10,7 +11,7 @@ app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 models = [{"name":"Simple Model", "acc":99.5},{"name":"Complicated Model", "acc":92}]
-fields = ["normal", "var2", "var3", "var4","var5"]
+fields = ["Non-ecotic (Normal) Beats", "Supraventricular Ectopic Beats", "Ventricular Ectopic Beats", "Fusion Beats","Unknown Beats"]
 
 def allowed_file(filename):
     return '.' in filename and \
@@ -18,8 +19,21 @@ def allowed_file(filename):
 
 def use_model(input, modelnum):
     print(input)
-    return [{"normal":True,"var2":False,"var3":True,"var4":False,"var5":False},{"normal":True,"var2":False,"var3":True,"var4":False,"var5":False}]
 
+    
+    results = [[0.1,0.1,0.6,0.1,0.1],[0.5,0.2,0.1,0.1,0.1]]
+    resultsposneg = []
+    for l in results:
+        x = max(l)
+        r = []
+        for i in l:
+            if i == x:
+                r.append("+")
+            else:
+                r.append("-")
+        resultsposneg.append(r)
+
+    return(resultsposneg)
 
 @app.route("/")
 def home():

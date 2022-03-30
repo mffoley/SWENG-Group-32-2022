@@ -40,9 +40,14 @@
                         </th>
                             
 
-                            {% for field in fields%}
+                            {% for field in result%}
 
-                            <td>{{ result[field] }}</td>
+                            {%if field == "-"%} 
+                            <td style="color: crimson;text"><b>{{ field }}</b></td>
+                            {%else%}
+                            <td style="color:green"><b>{{ field }}</b></td>
+                                {%endif%}
+
                             {% endfor %}
                     </tr>
 
