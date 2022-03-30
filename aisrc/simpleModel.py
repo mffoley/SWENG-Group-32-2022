@@ -17,7 +17,7 @@ import tensorflow as tf
 from tensorflow import keras
 
 
-def makeModel(train_inputs, train_outputs):
+def makeModel(train_inputs):
     
     model = Sequential()
 
