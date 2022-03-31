@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<!--Code by Divinector (www.divinectorweb.com)-->
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>How to Create responsive Homepage</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <div class="wrapper">
+            <div class="logo">
+                <img src="ecglogo1.png" alt="">
+            </div>
+            <ul class="nav-area">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="#">Portfolio</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </div>
+        <center>
+            <div class="welcome-text">
+                <h1 style="padding-top: 20%;">Upload a csv file to get started</h1>
+                {% if error != None %}
+                <h3 style="color: firebrick;">{{error}}</h3>
+                {% endif %}
+
+                <form action="/checker" method="POST" enctype="multipart/form-data">
+
+                    <div class="container">
+                        <div class="row gy-5">
+                            <div class="col">
+
+
+                                <div class="mb-3">
+                                    <label for="file"> File upload: </label>
+                                    <input class="form-control" type="file" name="file" id="file">
+                                </div>
+
+                            </div>
+                            <div class="col">
+
+                                <label for="model"> Model Selection: </label>
+                                <select class="form-control" id="model" aria-label="Select model" name="model">
+          <option selected value="1">Model 1 (Default)</option>
+          <option value="2">Model 2</option>
+          <option value="3">Model 3</option>
+        </select>
+                            </div>
+                        </div>
+
+
+
+
+
+
+                        <div class="row gy-5">
+                            <input type=submit class="btn btn-primary">
+                        </div>
+                    </div>
+
+
+
+
+
+                </form>
+            </div>
+        </center>
+    </header>
+
+</body>
+
+</html>
