@@ -79,11 +79,8 @@ def formatOutputs (train, test):
     test_outputs = to_categorical(test[187])
 
     return train_outputs, test_outputs
-    #target_train=result[187]
-    #target_test=result[187]
-    #y_train=to_categorical(target_train)
-    #y_test=to_categorical(target_test)
-    
+  
+
 
 #function that returns formatted training and testing inputs
 def formatInputs (train, test):

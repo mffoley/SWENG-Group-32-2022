@@ -55,7 +55,7 @@ def makeModel(train_inputs, train_outputs):
 def trainModel(model, train_inputs, train_outputs, test_inputs, test_outputs):
 
     model.fit(train_inputs, train_outputs, epochs = 10, batch_size = 32, validation_data = (test_inputs, test_outputs))
-    model.save("simplemodel")
+    #model.save("simplemodel")
 
     return model
 
