@@ -14,19 +14,20 @@ from sklearn.metrics import mean_squared_error
 #
 def readECGData ():
     
-    current_directory = os.getcwd()
-    print(current_directory)    
+    current_directory = os.getcwd()   
 
 
-    train = pd.read_csv('C:/Users/M2-Winterfell/Documents/Code/SWENG/SWENG-Group-32-2022/aisrc/data/mitbih_train.csv', header=None)
-    test = pd.read_csv('C:/Users/M2-Winterfell/Documents/Code/SWENG/SWENG-Group-32-2022/aisrc/data/mitbih_test.csv', header=None)
+    train = pd.read_csv(current_directory + '/data/mitbih_train.csv', header=None)
+    test = pd.read_csv(current_directory + '/data/mitbih_test.csv', header=None)
 
     return train, test
 
 def readECGDataLSTM ():
     
+    current_directory = os.getcwd()   
+
     np.random.seed(7)
-    dataframe = pd.read_csv('C:/Users/M2-Winterfell/Documents/Code/SWENG/SWENG-Group-32-2022/aisrc/data/mitbih_train.csv', usecols=[1], engine='python')
+    dataframe = pd.read_csv(current_directory + '/data/mitbih_train.csv', usecols=[1], engine='python')
     dataset = dataframe.values
     dataset = dataset.astype('float32')
     scaler = MinMaxScaler(feature_range=(0, 1))
