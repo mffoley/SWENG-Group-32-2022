@@ -2,7 +2,7 @@
 from keras.models import Model 
 from keras.models import Sequential
 from keras.layers import Dense                                                               
-from keras.layers import CuDNNLSTM, Bidirectional
+from keras.layers import LSTM
 from sklearn.utils.class_weight import compute_class_weight
 from sklearn.utils import class_weight
 import numpy as np
@@ -12,19 +12,11 @@ from keras.layers.embeddings import Embedding
 from keras.preprocessing.text import Tokenizer
 
 
-def makeModel(train_inputs):
+def makeModelLSTM(train_inputs):
     
     model = Sequential()
-
-    im_shape=(train_inputs.shape[1],1)
-
-    t = Tokenizer()
-    vocab_size = len(t.word_index) + 1
-
-    model.add(Embedding(vocab_size, 64, input_shape=im_shape))                                              #vertion2:model.add(Embedding(2500, embed_dim,input_length = im_shape, dropout = 0.2))
-    #input_length=max_length, maxlength=150. Maybe these two version are the same
-    model.add(Bidirectional(CuDNNLSTM(64, return_sequences=True, dropout_U = 0.2, dropout_W = 0.2)) )       #vertion2:model.add(LSTM(lstm_out, dropout_U = 0.2, dropout_W = 0.2))
-    model.add(Bidirectional(CuDNNLSTM(64, dropout_U = 0.2, dropout_W = 0.2)))
+    look_back = 1
+    model.add(LSTM(64, input_shape=(1, look_back)))     
 
     #vertion3:in need of reshape the tran_inputs and train_outputs. And there is a look_back variable that I can't figure it out what's its usage
     ##   reshape into X=t and Y=t+1
@@ -45,20 +37,18 @@ def makeModel(train_inputs):
     #......
     
 
-    model.add(Dense(64, activation='relu')) 
-    model.add(Dense(32, activation='relu'))  
-    model.add(Dense(5, activation='softmax', name='main_output'))
+    model.add(Dense(1)) 
     model.compile(loss = 'categorical_crossentropy', optimizer='adam',metrics = ['accuracy'])
-    model.summary()
+    #model.summary()
 
 
     return model
 
 
-def trainModel(model, train_inputs, train_outputs, test_inputs, test_outputs):
+def trainModelLSTM(model, train_inputs, train_outputs, test_inputs, test_outputs):
 
-    model.fit(train_inputs, train_outputs, epochs=10, batch_size=32, validation_data=(test_inputs, test_outputs) )
-    model.save("simplemodel")
+    model.fit(train_inputs, train_outputs, epochs=10, batch_size=1, verbose=2)
+    model.save("LSTMmodel")
 
     return model
 
@@ -76,7 +66,7 @@ def trainModelClassWeight(model, train_inputs, train_outputs, test_inputs, test_
     callbacks = callbacks, validation_data=(test_inputs, test_outputs), shuffle=True)
     #shuffle and validation data can be removed
 
-    model.save("simplemodelweighted")
+    model.save("LSTMmodelweighted")
 
     return model
 

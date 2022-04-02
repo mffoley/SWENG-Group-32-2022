@@ -6,7 +6,8 @@ from sklearn.utils.class_weight import compute_class_weight
 from sklearn.utils import class_weight
 from keras.utils.np_utils import to_categorical 
 import os
-
+from sklearn.preprocessing import MinMaxScaler
+from sklearn.metrics import mean_squared_error
 
 #
 #Function that loads in training and testing data
@@ -17,11 +18,36 @@ def readECGData ():
     print(current_directory)    
 
 
-    train = pd.read_csv(current_directory + '/data/mitbih_train.csv', header=None)
-    test = pd.read_csv(current_directory + '/data/mitbih_test.csv', header=None)
+    train = pd.read_csv('C:/Users/M2-Winterfell/Documents/Code/SWENG/SWENG-Group-32-2022/aisrc/data/mitbih_train.csv', header=None)
+    test = pd.read_csv('C:/Users/M2-Winterfell/Documents/Code/SWENG/SWENG-Group-32-2022/aisrc/data/mitbih_test.csv', header=None)
 
     return train, test
 
+def readECGDataLSTM ():
+    
+    np.random.seed(7)
+    dataframe = pd.read_csv('C:/Users/M2-Winterfell/Documents/Code/SWENG/SWENG-Group-32-2022/aisrc/data/mitbih_train.csv', usecols=[1], engine='python')
+    dataset = dataframe.values
+    dataset = dataset.astype('float32')
+    scaler = MinMaxScaler(feature_range=(0, 1))
+    dataset = scaler.fit_transform(dataset)
+
+    train_size = int(len(dataset) * 0.67)
+    test_size = len(dataset) - train_size
+    train, test = dataset[0:train_size,:], dataset[train_size:len(dataset),:]
+    return train, test
+
+
+    
+    return train, test
+
+def create_dataset(dataset, look_back=1):
+	dataX, dataY = [], []
+	for i in range(len(dataset)-look_back-1):
+		a = dataset[i:(i+look_back), 0]
+		dataX.append(a)
+		dataY.append(dataset[i + look_back, 0])
+	return np.array(dataX), np.array(dataY)
 
 def resampleData (data):
     
@@ -102,3 +128,11 @@ def formatInputs (train, test):
     #X_test = X_test.reshape(len(X_test), X_test.shape[1],1)
 
     return train_inputs, test_inputs
+
+def reshapeInputs(train, test):
+    look_back = 1
+    trainX, trainY = create_dataset(train, look_back)
+    testX, testY = create_dataset(test, look_back)
+    trainX = np.reshape(trainX, (trainX.shape[0], 1, trainX.shape[1]))
+    testX = np.reshape(testX, (testX.shape[0], 1, testX.shape[1]))
+    return trainX, testX, trainY, testY
