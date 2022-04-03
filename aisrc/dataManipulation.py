@@ -68,7 +68,7 @@ def calculateWeights(trainingData):
 
 
 def add_gaussian_noise(signal):
-    noise=np.random.normal(0,0.5,186)
+    noise=np.random.normal(0,0.5,187)
     return (signal+noise)
 
 #function that returns frequencies of all classes from a dataset
@@ -89,29 +89,26 @@ def formatOutputs (train, test):
 
 
 #function that returns formatted training and testing inputs
-def formatInputs (train, test):
-    train_inputs = train.iloc[:,:187].values
-    test_inputs = test.iloc[:,:187].values
+def formatInput (input):
+    input = input.iloc[:,:187].values
+    
 
-    return train_inputs, test_inputs
+    return input
+
+
 
 def addGaussianNoise (train_inputs):
 
     for i in range(len(train_inputs)):
         train_inputs[i,:187]= add_gaussian_noise(train_inputs[i,:187])
-    train_inputs = train_inputs.reshape(len(train_inputs), train_inputs.shape[1],1)
+    
     
     return train_inputs
 
 
-def reshapeInputsLSTM(train_inputs, test_inputs):
-
-
-    print(train_inputs.shape)
+def reshapeInputs(train_inputs, test_inputs):
 
     train_inputs = train_inputs.reshape(train_inputs.shape[0], train_inputs.shape[1],1)
     test_inputs = test_inputs.reshape(test_inputs.shape[0], test_inputs.shape[1],1) 
-
-    print(train_inputs.shape)
 
     return train_inputs, test_inputs

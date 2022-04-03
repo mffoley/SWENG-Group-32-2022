@@ -36,7 +36,7 @@ def trainModelLSTM(model, train_inputs, train_outputs, test_inputs, test_outputs
 
 
 #raw_train_outputs needs to be in the raw form before changed to binary in the to_categorical function
-def trainModelClassWeight(model, train_inputs, train_outputs, test_inputs, test_outputs, raw_train_outputs):
+def trainModelClassWeightLSTM(model, train_inputs, train_outputs, test_inputs, test_outputs, raw_train_outputs):
 
     class_weights = class_weight.compute_class_weight(class_weight = "balanced", classes = np.unique(raw_train_outputs), y = raw_train_outputs)
     
@@ -51,18 +51,3 @@ def trainModelClassWeight(model, train_inputs, train_outputs, test_inputs, test_
 
     return model
 
-def evaluateModel(model, test_input, test_output):
-    model.evaluate(test_input, test_output)
-
-#given a model and test inputs, predicts the class each row of the input belongs to
-def predictValues(model, test_inputs):
-
-    prediction = model.predict(test_inputs)
-    
-    return prediction
-
-def loadModel(name):
-
-    new_model = tf.keras.models.load_model(name)
-
-    return new_model
