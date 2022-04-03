@@ -10,12 +10,10 @@ from dataManipulation import readECGData, frequencyClasses, resampleData, format
 from LSTMModel import makeModelLSTM, trainModelLSTM
 
 
-
+#This is a temporary data read, will be done through UI instead
 train, test = readECGData()
 
-
-
-
+#passes testing inputs and model_id
 computePrediction (3, test)
 
 
