@@ -1,7 +1,7 @@
 
 from keras.models import Model 
 from keras.models import Sequential
-from keras.layers import Dense                                                               
+from keras.layers import Dense, Dropout                                                               
 from keras.layers import LSTM
 from sklearn.utils.class_weight import compute_class_weight
 from sklearn.utils import class_weight
@@ -14,40 +14,21 @@ from keras.preprocessing.text import Tokenizer
 
 def makeModelLSTM(train_inputs):
     
-    model = Sequential()
-    look_back = 1
-    model.add(LSTM(64, input_shape=(1, look_back)))     
 
-    #vertion3:in need of reshape the tran_inputs and train_outputs. And there is a look_back variable that I can't figure it out what's its usage
-    ##   reshape into X=t and Y=t+1
+    lstm_model = Sequential()
+    lstm_model.add(LSTM(64, input_shape=(187,1)))
+    lstm_model.add(Dense(128, activation = 'relu'))
+    lstm_model.add(Dropout(0.3))
+    lstm_model.add(Dense(5, activation = 'softmax'))
 
-    #look_back = 1
-    #trainX, trainY = create_dataset(train, look_back)
-    #testX, testY = create_dataset(test, look_back)
+    lstm_model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
 
-    ##  reshape input to be [samples, time steps, features]
-
-    #trainX = numpy.reshape(trainX, (trainX.shape[0], 1, trainX.shape[1]))
-    #testX = numpy.reshape(testX, (testX.shape[0], 1, testX.shape[1]))
-
-    ##  create and fit the LSTM network
-
-    #model = Sequential()
-    #model.add(LSTM(4, input_shape=(1, look_back)))
-    #......
-    
-
-    model.add(Dense(1)) 
-    model.compile(loss = 'categorical_crossentropy', optimizer='adam',metrics = ['accuracy'])
-    #model.summary()
-
-
-    return model
+    return lstm_model
 
 
 def trainModelLSTM(model, train_inputs, train_outputs, test_inputs, test_outputs):
 
-    model.fit(train_inputs, train_outputs, epochs=10, batch_size=1, verbose=2)
+    history = model.fit(train_inputs, train_outputs, epochs=20, batch_size=100, validation_data=(test_inputs, test_outputs))
     model.save("LSTMmodel")
 
     return model

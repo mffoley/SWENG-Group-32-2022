@@ -22,25 +22,6 @@ def readECGData ():
 
     return train, test
 
-def readECGDataLSTM ():
-    
-    current_directory = os.getcwd()   
-
-    np.random.seed(7)
-    dataframe = pd.read_csv(current_directory + '/data/mitbih_train.csv', usecols=[1], engine='python')
-    dataset = dataframe.values
-    dataset = dataset.astype('float32')
-    scaler = MinMaxScaler(feature_range=(0, 1))
-    dataset = scaler.fit_transform(dataset)
-
-    train_size = int(len(dataset) * 0.67)
-    test_size = len(dataset) - train_size
-    train, test = dataset[0:train_size,:], dataset[train_size:len(dataset),:]
-    return train, test
-
-
-    
-    return train, test
 
 def create_dataset(dataset, look_back=1):
 	dataX, dataY = [], []
@@ -86,8 +67,6 @@ def calculateWeights(trainingData):
     return classWeights
 
 
-
-
 def add_gaussian_noise(signal):
     noise=np.random.normal(0,0.5,186)
     return (signal+noise)
@@ -111,26 +90,28 @@ def formatOutputs (train, test):
 
 #function that returns formatted training and testing inputs
 def formatInputs (train, test):
-    train_inputs = train.iloc[:,:186].values
-    test_inputs = test.iloc[:,:186].values
-    #X_train=result.iloc[:,:186].values
-    #X_test=result.iloc[:,:186].values
-
-    for i in range(len(train_inputs)):
-        train_inputs[i,:186]= add_gaussian_noise(train_inputs[i,:186])
-    train_inputs = train_inputs.reshape(len(train_inputs), train_inputs.shape[1],1)
-    test_inputs = test_inputs.reshape(len(test_inputs), test_inputs.shape[1],1)
-    #for i in range(len(X_train)):
-    #    X_train[i,:186]= add_gaussian_noise(X_train[i,:186])
-    #X_train = X_train.reshape(len(X_train), X_train.shape[1],1)
-    #X_test = X_test.reshape(len(X_test), X_test.shape[1],1)
+    train_inputs = train.iloc[:,:187].values
+    test_inputs = test.iloc[:,:187].values
 
     return train_inputs, test_inputs
 
-def reshapeInputs(train, test):
-    look_back = 1
-    trainX, trainY = create_dataset(train, look_back)
-    testX, testY = create_dataset(test, look_back)
-    trainX = np.reshape(trainX, (trainX.shape[0], 1, trainX.shape[1]))
-    testX = np.reshape(testX, (testX.shape[0], 1, testX.shape[1]))
-    return trainX, testX, trainY, testY
+def addGaussianNoise (train_inputs):
+
+    for i in range(len(train_inputs)):
+        train_inputs[i,:187]= add_gaussian_noise(train_inputs[i,:187])
+    train_inputs = train_inputs.reshape(len(train_inputs), train_inputs.shape[1],1)
+    
+    return train_inputs
+
+
+def reshapeInputsLSTM(train_inputs, test_inputs):
+
+
+    print(train_inputs.shape)
+
+    train_inputs = train_inputs.reshape(train_inputs.shape[0], train_inputs.shape[1],1)
+    test_inputs = test_inputs.reshape(test_inputs.shape[0], test_inputs.shape[1],1) 
+
+    print(train_inputs.shape)
+
+    return train_inputs, test_inputs
