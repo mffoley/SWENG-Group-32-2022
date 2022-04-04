@@ -55,7 +55,7 @@ def makeModel(train_inputs):
 def trainModel(model, train_inputs, train_outputs, test_inputs, test_outputs):
 
     model.fit(train_inputs, train_outputs, epochs = 10, batch_size = 32, validation_data = (test_inputs, test_outputs))
-    #model.save("simplemodel")
+    model.save("simplemodel")
 
     return model
 
@@ -65,6 +65,8 @@ def trainModel(model, train_inputs, train_outputs, test_inputs, test_outputs):
 def trainModelClassWeight(model, train_inputs, train_outputs, test_inputs, test_outputs, raw_train_outputs):
 
     class_weights = class_weight.compute_class_weight(class_weight = "balanced", classes = np.unique(raw_train_outputs), y = raw_train_outputs)
+
+    print(class_weights)
     
     class_weights = dict(enumerate(class_weights))#don't know whether this is necessary or not
     callbacks = [keras.callbacks.ModelCheckpoint("best model at epoch:{epoch}.h5", save_best_only=True)]#don't know whether this is necessary or not
@@ -77,18 +79,3 @@ def trainModelClassWeight(model, train_inputs, train_outputs, test_inputs, test_
 
     return model
 
-def evaluateModel(model, test_input, test_output):
-    model.evaluate(test_input, test_output)
-
-#given a model and test inputs, predicts the class each row of the input belongs to
-def predictValues(model, test_inputs):
-
-    prediction = model.predict(test_inputs)
-    
-    return prediction
-
-def loadModel(name):
-
-    new_model = tf.keras.models.load_model(name)
-
-    return new_model
