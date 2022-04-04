@@ -14,7 +14,7 @@ from LSTMModel import makeModelLSTM, trainModelLSTM
 train, test = readECGData()
 
 #passes testing inputs and model_id
-computePrediction (3, test)
+computePrediction (2, test)
 
 
 
