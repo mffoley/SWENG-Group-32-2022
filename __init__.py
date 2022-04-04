@@ -6,7 +6,7 @@ from werkzeug.utils import secure_filename
 
 current_directory = os.getcwd()  
 
-sys.path.insert(0, current_directory+'../aisrc')
+sys.path.insert(0, current_directory+'/aisrc')
 
 UPLOAD_FOLDER = '~/Downloads'
 ALLOWED_EXTENSIONS = {'csv'}
