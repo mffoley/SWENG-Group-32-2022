@@ -15,27 +15,22 @@
 
         <div class="wrapper">
             <div class="logo">
-                <img src="https://i.postimg.cc/N0vbRYhm/ecglogo1.png" alt="W3Schools.com">
+                <img src="https://i.postimg.cc/N0vbRYhm/ecglogo1.png">
             </div>
-            <ul class="nav-area">
-                <li><a href="#">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Services</a></li>
-                <li><a href="#">Result</a></li>
-                <li><a href="#">Contact</a></li>
-            </ul>
         </div>
 
 
+
         <center>
-            {% if error != None %}
-            <h3 style="color: firebrick;">{{error}}</h3>
-            {% endif %}
 
             <form action="/checker" method="POST" enctype="multipart/form-data">
 
                 <div class="container">
-                    <h1 style="padding-top: 20%;">Upload a csv file to get started</h1>
+
+                    {% if error != None %}
+                    <h3 style="color: firebrick;">{{error}}</h3>
+                    {% endif %}
+                    <h1 style="background-color: #D9E9EB;">Upload a csv file to get started</h1>
                     <div>
                         <div class="col">
 
@@ -52,7 +47,6 @@
                             <select class="form-control" id="model" aria-label="Select model" name="model">
           <option selected value="1">Model 1 (Default)</option>
           <option value="2">Model 2</option>
-          <option value="3">Model 3</option>
         </select>
                         </div>
                     </div>
@@ -61,7 +55,7 @@
 
 
 
-
+                    <br>
                     <div>
                         <input type=submit class="btn btn-primary" width="100" height="50">
                     </div>

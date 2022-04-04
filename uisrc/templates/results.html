@@ -11,24 +11,22 @@
 
 </head>
 
-<body class="background-image">
+
+<body style="background-color:rgb(213, 234, 236);">
     <div class="wrapper">
         <div class="logo">
-            <img src="https://i.postimg.cc/N0vbRYhm/ecglogo1.png" alt="W3Schools.com">
+            <img src="https://i.postimg.cc/N0vbRYhm/ecglogo1.png" href="/">
         </div>
-        <ul class="nav-area">
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Services</a></li>
-            <li><a href="#">Result</a></li>
-            <li><a href="#">Contact</a></li>
-        </ul>
+
+        <div class="image">
+            <img src="https://i.postimg.cc/BnCnDRnt/result.png" href="/">
+        </div>
     </div>
 
     <body2 class="container">
         <!--background image-->
         <center class="centered">
-            <h2 style="color: antiquewhite;">Results:</h2>
+            <h2 style="color: rgb(0, 0, 0);">Results:</h2>
 
             <!--backbutton-->
 
@@ -69,13 +67,13 @@
 
             <br> <br><br> <br>
             <!-- description of esg {model_name}-->
-            <h1 style="font-size:20px;color:white;">This result is based on the model chosen: {{model_name}}</h1>
+            <h1 style="font-size:20px;color:rgb(0, 0, 0);">This result is based on the model chosen: {{model_name}}</h1>
             <!--<p>{{model_name}}</p>-->
             <br>
-            <h1 style="font-size:20px;color:white;">Model Accuracy: {{model_accuracy}}</h1>
+            <h1 style="font-size:20px;color:rgb(0, 0, 0);">Model Accuracy: {{model_accuracy}}</h1>
             <!--<p>{{model_accuracy}}</p>-->
             <br>
-            <h1 style="font-size:20px;color:white;">If you wish to use another model please return to the previous <a href="/" class="alert-link"> screen</a> </h1>
+            <h1 style="font-size:20px;color:rgb(0, 0, 0);">If you wish to use another model please return to the previous <a href="/" class="alert-link"> screen</a> </h1>
 
 
 
@@ -110,11 +108,11 @@
         padding: 0;
     }
     
-    .background-image {
-        background-image: url('https://wallpapercave.com/wp/wp3592441.jpg');
-        background-size: cover;
-        background-repeat: no-repeat;
-        height: 100vh;
+    .image {
+        position: absolute;
+        bottom: 8px;
+        left: 16px;
+        font-size: 18px;
     }
     
     body {
