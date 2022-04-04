@@ -25,7 +25,7 @@ def readECGData ():
 def readRawECGData ():
     
     current_directory = os.getcwd()   
-    test = pd.read_csv(current_directory + '/data/test_input_sample_10.csv', header=None)
+    test = pd.read_csv(current_directory + '/aisrc/data/test_input_sample_10.csv', header=None)
 
     return test
 

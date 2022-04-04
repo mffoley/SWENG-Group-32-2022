@@ -8,6 +8,8 @@ current_directory = os.getcwd()
 
 sys.path.insert(0, current_directory+'/aisrc')
 
+from main import main
+
 UPLOAD_FOLDER = '~/Downloads'
 ALLOWED_EXTENSIONS = {'csv'}
 
@@ -22,10 +24,13 @@ def allowed_file(filename):
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 def use_model(input, modelnum):
+    print(modelnum)
     print(input)
 
-    
-    results = [[0.1,0.1,0.6,0.1,0.1],[0.5,0.2,0.1,0.1,0.1]]
+    r = main(input,modelnum)
+    print("R\n\n")
+    print(r)
+    results = r #[[0.1,0.1,0.6,0.1,0.1],[0.5,0.2,0.1,0.1,0.1]]
     resultsposneg = []
     for l in results:
         x = max(l)
@@ -61,7 +66,7 @@ def check():
             f = request.files['file']
             model_info = models[model-1]
             # vvvvvvv do something with the file data vvvvvvv
-            data = use_model(f.read(),model-1)
+            data = use_model(f.read(),model)
             # ^^^^^^^ do something with the file data ^^^^^^^
 
             return render_template("results.html", model_name=model_info["name"] , model_accuracy=model_info["acc"], fields=fields, results = data )

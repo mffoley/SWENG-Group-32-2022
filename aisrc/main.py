@@ -3,6 +3,9 @@
 #importing a function from the other file
 
 import keras
+import pandas as pd 
+from io import StringIO
+from csv import reader
 from simpleModel import makeModel, trainModel, trainModelClassWeight
 from computePrediction import computePrediction
 from keras.utils.np_utils import to_categorical
@@ -10,13 +13,24 @@ from dataManipulation import readECGData, readRawECGData, frequencyClasses, resa
 from LSTMModel import makeModelLSTM, trainModelLSTM
 
 
-#This is a temporary data read, will be done through UI instead
-test = readRawECGData()
+def main(raw,num):
 
-#passes testing inputs and model_id
-computePrediction (2, test)
+  print ( "main")
+  #This is a temporary data read, will be done through UI instead
+  test = readRawECGData()
+  #stringToCSV(raw)
+
+  #passes testing inputs and model_id
+  return computePrediction (num, test)
 
 
+def stringToCSV(data):
+    print("STR TO CSV:\n\n")
+    print(str(data))
+    test_data = pd.read_csv(StringIO(str(data)), header=None)
+    print("\n\n\nFORMATTED DATA\n\n")
+    print(test_data)
+    return test_data
 
 
 
