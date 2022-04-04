@@ -6,15 +6,15 @@ import keras
 from simpleModel import makeModel, trainModel, trainModelClassWeight
 from computePrediction import computePrediction
 from keras.utils.np_utils import to_categorical
-from dataManipulation import readECGData, frequencyClasses, resampleData, formatOutputs, formatInput, calculateWeights, reshapeInputs, addGaussianNoise
+from dataManipulation import readECGData, readRawECGData, frequencyClasses, resampleData, formatOutputs, formatInput, calculateWeights, reshapeInputs, addGaussianNoise
 from LSTMModel import makeModelLSTM, trainModelLSTM
 
 
 #This is a temporary data read, will be done through UI instead
-train, test = readECGData()
+test = readRawECGData()
 
 #passes testing inputs and model_id
-computePrediction (3, test)
+print (computePrediction (3, test))
 
 
 

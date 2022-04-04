@@ -16,11 +16,19 @@ def readECGData ():
     
     current_directory = os.getcwd()   
 
-
-    train = pd.read_csv(current_directory + '/data/mitbih_train.csv', header=None)
-    test = pd.read_csv(current_directory + '/data/mitbih_test.csv', header=None)
+    train = pd.read_csv(current_directory + '/data/103.csv', header=None)
+    test = pd.read_csv(current_directory + '/data/103.csv', header=None)
 
     return train, test
+
+
+def readRawECGData ():
+    
+    current_directory = os.getcwd()   
+
+    test = pd.read_csv(current_directory + '/data/mitbih_test.csv', header=None)
+
+    return test
 
 
 def create_dataset(dataset, look_back=1):
