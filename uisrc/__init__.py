@@ -4,13 +4,17 @@ import sys
 from flask import Flask, redirect, url_for, render_template, session, request, flash, get_flashed_messages
 from werkzeug.utils import secure_filename
 
+current_directory = os.getcwd()  
+
+sys.path.insert(0, current_directory+'../aisrc')
+
 UPLOAD_FOLDER = '~/Downloads'
 ALLOWED_EXTENSIONS = {'csv'}
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
-models = [{"name":"Simple Model", "acc":99.5},{"name":"Complicated Model", "acc":92}]
+models = [{"name":"CNN", "acc":97},{"name":"CNN Class Weighted with Noise", "acc":85},{"name":"LSTM","acc":83.5}]
 fields = ["Non-ecotic (Normal) Beats", "Supraventricular Ectopic Beats", "Ventricular Ectopic Beats", "Fusion Beats","Unknown Beats"]
 
 def allowed_file(filename):
