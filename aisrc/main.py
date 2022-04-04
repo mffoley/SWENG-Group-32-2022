@@ -14,7 +14,7 @@ from LSTMModel import makeModelLSTM, trainModelLSTM
 test = readRawECGData()
 
 #passes testing inputs and model_id
-print (computePrediction (3, test))
+computePrediction (2, test)
 
 
 

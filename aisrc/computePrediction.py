@@ -20,6 +20,8 @@ def computePrediction (model_id, testing_data):
         model = keras.models.load_model("simplemodel")
         predictions = model.predict(testing_data)
 
+        return predictions
+
         print(predictions[:,:50])
 
     elif (model_id == WEIGHTED_CNN_MODEL_ID):
@@ -29,6 +31,8 @@ def computePrediction (model_id, testing_data):
         model = keras.models.load_model("simplemodelweighted")
         predictions = model.predict(testing_data) 
 
+        return predictions
+
         print(predictions[:,:50])
         
     elif (model_id == LSTM_MODEL_ID):
@@ -37,6 +41,8 @@ def computePrediction (model_id, testing_data):
 
         model = keras.models.load_model("LSTMModel")
         predictions = model.predict(testing_data)
+
+        return predictions
 
         print(predictions[:,:50])
 

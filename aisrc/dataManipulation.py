@@ -26,7 +26,8 @@ def readRawECGData ():
     
     current_directory = os.getcwd()   
 
-    test = pd.read_csv(current_directory + '/data/mitbih_test.csv', header=None)
+    train = pd.read_csv(current_directory + '/data/mitbih_train.csv', header=None)
+    test = pd.read_csv(current_directory + '/data/test_input_sample_10.csv', header=None)
 
     return test
 
