@@ -28,7 +28,7 @@ def computePrediction (model_id, testing_data):
 
         print(testing_data.shape)
 
-        model = keras.models.load_model("simplemodelweighted")
+        model = keras.models.load_model("simplemodel")
         predictions = model.predict(testing_data) 
 
         return predictions
@@ -39,7 +39,7 @@ def computePrediction (model_id, testing_data):
 
         print(testing_data.shape)
 
-        model = keras.models.load_model("LSTMModel")
+        model = keras.models.load_model("simplemodel")
         predictions = model.predict(testing_data)
 
         return predictions
