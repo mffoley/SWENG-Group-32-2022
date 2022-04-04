@@ -8,7 +8,7 @@ current_directory = os.getcwd()
 
 sys.path.insert(0, current_directory+'/aisrc')
 
-from main import main
+from aisrc.main import main
 
 UPLOAD_FOLDER = '~/Downloads'
 ALLOWED_EXTENSIONS = {'csv'}
