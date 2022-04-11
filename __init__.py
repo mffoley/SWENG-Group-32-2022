@@ -16,7 +16,7 @@ ALLOWED_EXTENSIONS = {'csv'}
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
-models = [{"name":"CNN", "acc":97},{"name":"CNN Class Weighted with Noise", "acc":85},{"name":"LSTM","acc":83.5}]
+models = [{"name":"CNN", "acc":"97%"},{"name":"Residual Neural Network", "acc":"95%"},{"name":"LSTM","acc":"83.5%"}]
 fields = ["Non-ecotic (Normal) Beats", "Supraventricular Ectopic Beats", "Ventricular Ectopic Beats", "Fusion Beats","Unknown Beats"]
 
 def allowed_file(filename):
