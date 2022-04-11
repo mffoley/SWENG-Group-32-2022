@@ -1,5 +1,5 @@
 CNN_MODEL_ID = 1
-WEIGHTED_CNN_MODEL_ID = 2
+RESNET_MODEL_ID = 2
 LSTM_MODEL_ID = 3
 
 from cgi import test
@@ -24,11 +24,11 @@ def computePrediction (model_id, testing_data):
 
         print(predictions[:,:50])
 
-    elif (model_id == WEIGHTED_CNN_MODEL_ID):
+    elif (model_id == RESNET_MODEL_ID):
 
         print(testing_data.shape)
 
-        model = keras.models.load_model("simplemodel")
+        model = keras.models.load_model("ResNetmodel")
         predictions = model.predict(testing_data) 
 
         return predictions
@@ -39,7 +39,7 @@ def computePrediction (model_id, testing_data):
 
         print(testing_data.shape)
 
-        model = keras.models.load_model("simplemodel")
+        model = keras.models.load_model("LSTMmodel")
         predictions = model.predict(testing_data)
 
         return predictions
