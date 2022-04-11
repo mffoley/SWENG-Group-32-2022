@@ -24,12 +24,11 @@ def allowed_file(filename):
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 def use_model(input, modelnum):
-    print(modelnum)
-    print(input)
 
     r = main(input,modelnum)
-    print("R\n\n")
+    print("Results:\n")
     print(r)
+    print("\n\n\n")
     results = r #[[0.1,0.1,0.6,0.1,0.1],[0.5,0.2,0.1,0.1,0.1]]
     resultsposneg = []
     for l in results:
@@ -48,25 +47,24 @@ def use_model(input, modelnum):
 def home():
     error = request.args.get('error')
     print(error)
-    print("home")
     return render_template("input.html", error = error)
 
 @app.route("/results")
 def conic():
-    print("data")
     return render_template("results.html", model_name="sample" , model_accuracy=99.5, normal = True )
 
 
 @app.route("/checker", methods = ['POST'])
 def check():
-    print("DATA:")
     model = int(request.form['model'])
     if "file" in request.files.keys() and request.files['file'].filename != "":
         if allowed_file(request.files['file'].filename):
             f = request.files['file']
             model_info = models[model-1]
+
+            stream = f.read().decode("UTF8")
             # vvvvvvv do something with the file data vvvvvvv
-            data = use_model(f.read(),model)
+            data = use_model(stream,model)
             # ^^^^^^^ do something with the file data ^^^^^^^
 
             return render_template("results.html", model_name=model_info["name"] , model_accuracy=model_info["acc"], fields=fields, results = data )

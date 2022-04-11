@@ -15,19 +15,14 @@ from LSTMModel import makeModelLSTM, trainModelLSTM
 
 def main(raw,num):
 
-  print ( "main")
   #This is a temporary data read, will be done through UI instead
-  test = readRawECGData()
-  #stringToCSV(raw)
+  data = stringToCSV(raw)
 
   #passes testing inputs and model_id
-  return computePrediction (num, test)
-
+  return computePrediction (num, data)
 
 def stringToCSV(data):
-    print("STR TO CSV:\n\n")
-    print(str(data))
-    test_data = pd.read_csv(StringIO(str(data)), header=None)
+    test_data = pd.read_csv(StringIO(data), header=None)
     print("\n\n\nFORMATTED DATA\n\n")
     print(test_data)
     return test_data
