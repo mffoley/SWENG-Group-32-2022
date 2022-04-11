@@ -12,7 +12,5 @@
 - To create a new requirements document (does not need to be done except when a new dependency is added) use  `$ pip3 freeze > requirements.txt`
 
 
-#### BY WED 30 MAR, HAVE WEBPAGE DONE
-Upload file, dropdown for model, "classify" runs model
-Sampling frequency specified, expect the person to upload it
-all local
+
+#### Note: because of large file sizes, the files in the ResNetmodel folder will not be pulled correctly and will each need to manually downloaded. 
