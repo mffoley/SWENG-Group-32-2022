@@ -104,20 +104,6 @@ def trainResNet50Model(model, train_inputs, train_outputs, test_inputs, test_out
 
     return model
 
-def trainModelClassWeight(model, train_inputs, train_outputs, test_inputs, test_outputs, raw_train_outputs):
-
-    class_weights = class_weight.compute_class_weight(class_weight = "balanced", classes = np.unique(raw_train_outputs), y = raw_train_outputs)
-    
-    class_weights = dict(enumerate(class_weights))
-    callbacks = [keras.callbacks.ModelCheckpoint("best model at epoch:{epoch}.h5", save_best_only=True)]
-
-    model.fit(train_inputs, train_outputs, epochs = 40, batch_size = 32, class_weight=class_weights, 
-    callbacks = callbacks, validation_data=(test_inputs, test_outputs), shuffle=True)
-    #shuffle and validation data can be removed
-
-    model.save("ResNet50Mmodelweighted")
-
-    return model
 
 def evaluateModel(model, test_input, test_output):
     model.evaluate(test_input, test_output)

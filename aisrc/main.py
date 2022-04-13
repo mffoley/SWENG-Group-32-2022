@@ -15,7 +15,6 @@ from LSTMModel import makeModelLSTM, trainModelLSTM
 
 def main(raw,num):
 
-  #This is a temporary data read, will be done through UI instead
   data = stringToCSV(raw)
 
   #passes testing inputs and model_id
