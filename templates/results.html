@@ -28,40 +28,40 @@
 
             <!--backbutton-->
 
+            <div style="overflow:scroll; height:500px;">
+                <table class="table table-light table-striped" id="">
+                    <thead>
+                        <tr>
 
-            <table class="table table-light table-striped">
-                <thead>
-                    <tr>
+                            <th scope="col">Entry #</th>
+                            {% for field in fields%}
 
-                        <th scope="col">Entry #</th>
-                        {% for field in fields%}
+                            <th scope="col">{{ field }}</th>
+                            {% endfor %}
 
-                        <th scope="col">{{ field }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% set count = namespace(value=1) %} {% for result in results %}
+                        <tr>
+                            <th scope="row">
+                                {{ count.value }} {% set count.value = count.value + 1 %}
+                            </th>
+
+
+                            {% for field in result%} {%if field == "-"%}
+                            <td style="color: crimson;text"><b>{{ field }}</b></td>
+                            {%else%}
+                            <td style="color:green"><b>{{ field }}</b></td>
+                            {%endif%} {% endfor %}
+                        </tr>
+
                         {% endfor %}
 
-                    </tr>
-                </thead>
-                <tbody>
-                    {% set count = namespace(value=1) %} {% for result in results %}
-                    <tr>
-                        <th scope="row">
-                            {{ count.value }} {% set count.value = count.value + 1 %}
-                        </th>
+                    </tbody>
+                </table>
 
-
-                        {% for field in result%} {%if field == "-"%}
-                        <td style="color: crimson;text"><b>{{ field }}</b></td>
-                        {%else%}
-                        <td style="color:green"><b>{{ field }}</b></td>
-                        {%endif%} {% endfor %}
-                    </tr>
-
-                    {% endfor %}
-
-                </tbody>
-            </table>
-
-
+            </div>    
 
             <br> <br><br> <br>
             <!-- description of esg {model_name}-->
